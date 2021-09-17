@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block contents %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 border-bottom">
+    <h1 class="h2 text-center p-2">練習</h1>
+</div>
+
+<form method="POST" name="freeThroughForm" class="p-2">
+        {% csrf_token %}
+        <label class="h3 p-2">フリースロー</label>
+        <table class="table">
+            <tr>
+                <th scope="col">選手名</th>
+                <th scope="col">決めた本数</th>
+            </tr>
+            {% for player in players %}
+            <tr>
+                <td>{{ player.name }}</td>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-select-sm p-2" name="freeThroughMake">
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0</option>
+                        </select> 
+                    </div>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        
+        <div class="form-actions p-2">
+            <input type="submit" value="保存" class="btn btn-primary">
+        </div>
+</form> 
+
+<form method="POST" name="3men" class="p-2">
+    <label class="h3 p-2">3men</label>
+    {% csrf_token %}
+    <table class="table">
+        <tr>
+            <th scope="col">レイアップ(attempt)</th>
+            <th scope="col">レイアップ(make)</th>
+            <th scope="col">時間内に達成できたか</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="3men_attempt" class="form-input form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="3men_make" class="form-input form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group form-check-inline">
+                    <input type="radio" name="達成" value="Yes" class="form-check-input"><label class="form-check-label p-2">Yes</label>
+                    <input type="radio" name="達成" value="No" class="form-check-input"><label class="form-check-label p-2">No</label>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="form-group">
+        <input type="submit" name="3men" value="保存" class="btn btn-primary">
+    </div>
+    
+</form>    
+
+<form method="POST" class="p-2">
+    {% csrf_token %}
+    <input type="hidden" name="shooting">
+    <div class="h2 p-2">
+        シューティング
+    </div>
+    <table class="table">
+        <tr>
+            <th scope="col">選手名</th>
+            <th scope="col">打った本数</th>
+            <th scope="col">決めた本数</th>
+            <th scope="col"></th>
+        </tr>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.name }}</td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="{{ player.name }}_shootingAttempt">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="{{ player.name }}_shootingMake">
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="form-actions">
+        <input type="submit" value="保存" class="btn btn-primary">
+    </div>
+</form>
+
+{% endblock %}

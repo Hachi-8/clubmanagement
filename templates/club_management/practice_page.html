@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block contents %}
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 border-bottom">
+    <h1 class="h2 text-center p-2">練習</h1>   
+    <a href="/club_management/practiceform_page/" class="col p-2">入力</a>
+    {% if user.username in managerNames %}
+        <a href="/club_management/practiceform_page/" class="col p-2">入力</a>
+    {% endif %}
+</div>
+
+<div class="p-2">
+    <div class="h2 p-2">
+        フリースロー
+    </div>
+    <div class="d-flex p-2">
+    {% for name,data in freeThroughData.items %}
+        <div class="d-inline-flex p-2">
+            <ul class="list-group">
+                <li class="list-group-item">{{ name }}</li>
+    
+                <li class="list-group-item">決めた本数：{{ data.0 }}</li>
+                <li class="list-group-item">打った本数：{{ data.1 }}</li>
+                <li class="list-group-item">今月の確率：{{ data.2 }} %</li>
+            </ul>
+        </div>
+          
+    {% endfor %}
+    </div>
+
+
+</div>
+
+<div class="p-2">
+    <h2 class="h2">3men</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">日付</th>
+            <th scope="col">打った本数</th>
+            <th scope="col">決めた本数</th>
+            <th scope="col">時間内に達成したか</th>
+        </tr> 
+        {% for data in threeMenData %}
+            <tr>
+                <td>{{ data.date }}</td>
+                <td>{{ data.attempt }}</td>
+                <td>{{ data.make }}</td>
+                <td>{{ data.accomplish }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="p-2"> 
+    <div class="h3">
+        シューティング
+    </div>
+    <div class="text-secondary">
+        *直近2週間のデータ
+    </div>
+    <table class="table">
+        <tr>
+            <th scope="col">選手名</th>
+            <th scope="col">打った本数</th>
+            <th scope="col">決めた本数</th>
+            <th scope="col">確率</th>
+        </tr>
+        {% for name,data in shootingData.items %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ data.0 }}</td>
+                <td>{{ data.1 }}</td>
+                <td>{{ data.2 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

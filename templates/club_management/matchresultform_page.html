@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% block contents %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 border-bottom">
+    <h1 class="h3 p-4">試合結果入力</h1>
+</div>
+
+<div>
+  
+</div>
+
+<form method="POST" name="チーム成績">
+    {% csrf_token %}
+    <table class=table>
+        <tr>
+            <th>大学名</th>
+            <th>得点</th>
+            <th>1Q</th>
+            <th>2Q</th>
+            <th>3Q</th>
+            <th>4Q</th>
+        </tr>
+        <tr>
+            <td>ICU</td>
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="ICU_total">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="ICU_1Q">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="ICU_2Q">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="ICU_3Q">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="ICU_4Q">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <input type="text" placeholder="相手校名" class="form-control" name="OpponentTeam">
+                </div>
+            </td>
+
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="OpTotal">
+                </div>
+            </td>
+
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="Op1Q">
+                </div>
+            </td>
+
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="Op2Q">
+                </div>
+            </td>
+
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="Op3Q">
+                </div>
+            </td>
+            
+            <td>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="Op4Q">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="text-secondary">
+        *練習試合で一日に何回も同じ学校と対戦した場合は、相手校名は「相手校名（～回目）」のように入力してください。
+    </div>
+    <div class="form-group">
+        <label class="form-label">日付</label>
+        <input type="date" class="form-control" name="matchDate">
+    </div>
+    <div class="form-actions">
+        <input type="submit" class="btn btn-primary">
+    </div>
+</form>
+
+<p class="h3 p-4">個人成績入力</p>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group form-inline">
+        <label class="form-label">日付：</label>
+        <input type="date" class="form-control" name="matchDate">
+    </div>
+    <div class="form-group form-inline">
+        <label class="form-label">相手校名：</label>
+        <input type="text" placeholder="↑で入力した名前を入力" class="form-control" name="opponentTeam">
+    </div>
+    <table class="table">
+        <div>A・・・アテンプト/I・・・イン</div>
+        <tr>
+            <th scope="col">選手名</th>
+            <th scope="col">得点</th>
+            <th scope="col">ゴール下A</th>
+            <th scope="col">ゴール下I</th>
+            <th scope="col">ミドルA</th>
+            <th scope="col">ミドルI</th>
+            <th scope="col">スリーA</th>
+            <th scope="col">スリーI</th>
+            <th scope="col">ファール</th>
+            <th scope="col">ターンオーバー</th>
+        </tr>
+        {% for player in players %}
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="individualPoints" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="underGoalAttempt" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="underGoalIn" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="middleAttempt" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="middleIn" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="threeAttempt" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="threeIn" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="faul" value="0" class="form-control">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <input type="number" name="turnOver" value=0 class="form-control">
+                </div>
+            </td>
+        </tr>
+        {% endfor %}    
+    </table>
+    <div>
+        <input type="submit" class="btn btn-primary">
+    </div>
+</form>
+
+{% endblock %}

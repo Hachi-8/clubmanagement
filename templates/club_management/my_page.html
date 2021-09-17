@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block contents %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 border-bottom">
+    <h1 class="h2">体調管理ページ</h1>
+</div>
+
+<div class="d-flex">
+    <div class="container-fluid flex-column">
+        <h4 class="h3 p-2">今日の体調</h4>
+        <form method="POST">
+        
+            {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label">体温</label>
+                    <div class="form-check form-check-inline" class="controls">
+                        <input type="number" name="体温" step="0.1" value="36.0" required class="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">咳：</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="咳" value="あり" id="">
+                        <label class="form-check-label">あり</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="咳" value="なし" id="" checked>
+                        <label class="form-check-label">なし</label> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">息苦しさ：</label>
+                    <div class="form-check form-check-inline"> 
+                        <input class="form-check-input" type="radio" name="息苦しさ" value="あり" id="">
+                        <label class="form-check-label">あり</label> 
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="息苦しさ" value="なし" id="" checked>
+                        <label class="form-check-label">なし</label> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">喉の痛み：</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="喉の痛み" value="あり" id="">
+                        <label class="form-check-label">あり</label> 
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="喉の痛み" value="なし" id="" checked>
+                        <label class="form-check-label">なし</label> 
+                    </div>
+                </div>       
+        
+
+                <div class="form-group">
+                    <label class="control-label">倦怠感：</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="倦怠感" value="あり" id="">
+                        <label class="form-check-label">あり</label> 
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="倦怠感" value="なし" id="" checked>
+                        <label class="form-check-label">なし</label> 
+                    </div>
+                </div>
+
+                <div class="form-group">       
+                    <label class="control-label">味覚嗅覚異常：</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="味覚嗅覚異常" value="あり" id="">
+                        <label class="form-check-label">あり</label> 
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="味覚嗅覚異常" value="なし" id="" checked>
+                        <label class="form-check-label">なし</label> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">その他：</label>
+                    <div class="form-check-inline">
+                        <input type="text" name="その他" class="input-xlarge" value="なし">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="保存" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container-fluid table-responsive flex-column p-2">
+        <table class="table">
+            <tr>
+                <th scope="col">日付</th>
+                <th scope="col">体温</th>
+                <th scope="col">咳</th>
+                <th scope="col">息苦しさ</th>
+                <th scope="col">のどの痛み</th>
+                <th scope="col">倦怠感</th>
+                <th scope="col">味覚嗅覚異常</th>
+                <th scope="col">その他</th>
+            </tr>
+            {% for item in myCondition %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.bodyTemperature }}</td>
+                    <td>{{ item.cough }}</td>
+                    <td>{{ item.dyspnea }}</td>
+                    <td>{{ item.soreThroat }}</td>
+                    <td>{{ item.malaise }}</td>
+                    <td>{{ item.abnormalTasteAndSmell }}</td>
+                    <td>{{ item.other }}</td>
+                </tr>
+            {% endfor %}    
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block contents %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 border-bottom">
+    <h1 class="h2 p-2">試合結果</h1>
+    <a href="/club_management/matchresultform_page/" class="col p-2">新規作成</a>
+</div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th scope="col">日付</th>
+            <th scope="col">チーム名</th>
+            <th scope="col">総得点</th>
+            <th scope="col">1Q</th>
+            <th scope="col">2Q</th>
+            <th scope="col">3Q</th>
+            <th scope="col">4Q</th>
+            <th scope="col"> </th>
+        </tr>
+        {% for data in matchResultData %}
+        <tr>
+            <td rowspan="2">{{ data.date }}</td>
+            <td>ICU</td>
+            <td>{{ data.icu_total }}</td>
+            <td>{{ data.icu_1Q }}</td>
+            <td>{{ data.icu_2Q }}</td>
+            <td>{{ data.icu_3Q }}</td>
+            <td>{{ data.icu_4Q }}</td>
+           <td rowspan="2">
+                <div>
+                    <form action="{% url 'club_management:matchresultdetail_page' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="hidden" name="hidden_teamname" value="{{ data.op_team }}">
+                            <input type="hidden" name="hidden_date" value="{{ data.date }}">
+                            <input type="submit" value="詳細" class="btn">
+                        </div>
+                    </form>
+                </div>
+            </td> 
+        </tr>
+        <tr>
+            <td>{{ data.op_team }}</td>
+            <td>{{ data.op_total }}</td>
+            <td>{{ data.op_1Q }}</td>
+            <td>{{ data.op_2Q }}</td>
+            <td>{{ data.op_3Q }}</td>
+            <td>{{ data.op_4Q }}</td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+    
+</div>
+
+{% endblock %}

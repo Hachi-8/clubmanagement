@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block contents %}
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<h2>ログインしました．</h2>
+<p>こんにちは，{{ user }}さん</p>
+
+<p><a href="{% url 'logout' %}">ログアウトする</a></p>
+<p><a href="{% url 'password_change' %}">パスワードの変更</a></p>
+<p><a href="{% url 'password_reset' %}">パスワードを忘れた場合</a></p>
+
+<div>
+    {% if contents.notExist %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <li>
+            <label>学年
+                <li>
+                <ul><input type="radio" name="grade" value="1">1</ul>
+                <ul><input type="radio" name="grade" value="2">2</ul>
+                <ul><input type="radio" name="grade" value="3">3</ul>
+                <ul><input type="radio" name="grade" value="4">4</ul>
+                </li>
+            </label>
+        </li>
+
+        <li>
+            <label>ID
+                <input type="number" name="schoolId">
+            </label>
+        </li>
+
+        <li>
+            <label>役職
+                <ul><input type="radio" name="position", value="プレイヤー">プレイヤー</ul>
+                <ul><input type="radio" name="position", value="マネージャー">マネージャー</ul>
+                <ul><input type="radio" name="position", value="コーチ">コーチ</ul>
+                <ul><input type="radio" name="position", value="OB">OB</ul>
+            </label>
+        </li>
+
+        <button type = "submit">登録</button>
+    </form>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th scope="col">学年</th>
+                <th scope="col">ID</th>
+                <th scope="col">役職</th>
+            </tr>
+            <tr>
+                <td>{{ contents.userDetail.grade }}</td>
+                <td>{{ contents.userDetail.schoolId }}</td>
+                <td>{{ contents.userDetail.position }}</td>
+            </tr>
+        </table>
+    {% endif %}
+</div>
+
+</html>
+
+{% endblock %}
