@@ -23,7 +23,7 @@
         <div class="col-12">
           <nav class="navbar navbar-expand fixed-top navbar-dark bs-navbar fixd-top" style='background-color:cadetblue;' id="bs-navbar">
             <a class="navbar-brand mr-md-2" href="/club_management/top_page/">
-              Club Management
+              ICU Basketball Seraphim
             </a>
               <!-- ↓↓レイアウトを調整する為のダミー↓↓ --> 
 
@@ -35,11 +35,11 @@
               <!-- ↑↑ダミーここまで↑↑ -->                            
 
               <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="/club_management/practice_page/" >練習</a></li>
-                <li class="nav-item"><a class="nav-link" href="/club_management/matchresult_page/" >試合結果</a></li>
-                <li class="nav-item"><a class="nav-link" href="/club_management/group_page/" >グループ</a></li>
-                <li class="nav-item"><a class="nav-link" href="/club_management/my_page/" >体調</a></li>
                 {% if user.is_authenticated %}
+                  <li class="nav-item"><a class="nav-link" href="/club_management/practice_page/" >練習</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/club_management/matchresult_page/" >試合結果</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/club_management/group_page/" >グループ</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/club_management/my_page/" >体調</a></li>
                   <li class="nav-item"><a class="nav-link" href="/registration/login_done/" >マイページ</a></li>
                 {% else %} 
                   <li class="nav-item"><a class="nav-link" href="/registration/login/" >ログイン</a></li>

@@ -5,8 +5,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<h2>ログインしました．</h2>
-<p>こんにちは，{{ user }}さん</p>
+<h2 class="h2 p-2">{{ user }}でログイン中</h2>
 
 <p><a href="{% url 'logout' %}">ログアウトする</a></p>
 <p><a href="{% url 'password_change' %}">パスワードの変更</a></p>
@@ -16,33 +15,66 @@
     {% if contents.notExist %}
     <form method="POST" action="">
         {% csrf_token %}
-        <li>
-            <label>学年
-                <li>
-                <ul><input type="radio" name="grade" value="1">1</ul>
-                <ul><input type="radio" name="grade" value="2">2</ul>
-                <ul><input type="radio" name="grade" value="3">3</ul>
-                <ul><input type="radio" name="grade" value="4">4</ul>
-                </li>
-            </label>
-        </li>
-
-        <li>
-            <label>ID
-                <input type="number" name="schoolId">
-            </label>
-        </li>
-
-        <li>
-            <label>役職
-                <ul><input type="radio" name="position", value="プレイヤー">プレイヤー</ul>
-                <ul><input type="radio" name="position", value="マネージャー">マネージャー</ul>
-                <ul><input type="radio" name="position", value="コーチ">コーチ</ul>
-                <ul><input type="radio" name="position", value="OB">OB</ul>
-            </label>
-        </li>
-
-        <button type = "submit">登録</button>
+        <table class="table">
+            <tr>
+                <th scope="col">学年</th>
+                <th scope="col">学内ID(数字のみ)</th>
+                <th scope="col">役職</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="radio" name="grade" value="1" class="form-check-input">
+                            <label class="form-check-label">1</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="grade" value="2" class="form-check-input">
+                            <label class="form-check-label">2</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="grade" value="3" class="form-check-input">
+                            <label class="form-check-label">3</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="grade" value="4" class="form-check-input">
+                            <label class="form-check-label">4</label>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" name="schoolId">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group"> 
+                        <div class="form-check">
+                            <input type="radio" name="position", value="プレイヤー" class="form-check-input">
+                            <label class="form-check-label">プレイヤー</label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="radio" name="position", value="マネージャー" class="form-check-input">
+                            <label class="form-check-label">マネージャー</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="position", value="コーチ" class="form-check-input">
+                            <label class="form-check-label">コーチ</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" name="position", value="OB" class="form-check-input">
+                            <label class="form-check-label">OB</label>
+                        </div>
+                        
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <button type = "submit" class="btn btn-primary">登録</button>
+        </div>
+        
     </form>
     {% else %}
         <table class="table">

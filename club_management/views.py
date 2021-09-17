@@ -13,7 +13,7 @@ class Toppage_View(View):
 
 class Mypage_View(View):  
     def get(self, request, *args, **kwargs):
-        myCondition = Conditions.objects.filter(name=request.user) 
+        myCondition = Conditions.objects.filter(name=request.user)[::-1]
         return render(request, 'club_management/my_page.html',{"myCondition":myCondition})
 
     def post(self, request, *args, **kwargs):
@@ -128,7 +128,7 @@ class PracticeForm_View(View):
         return redirect("/club_management/practiceform_page/")
 class Matchresult_View(View):  
     def get(self, request, *args, **kwargs):  
-        matchResultData = MatchResult.objects.all()
+        matchResultData = MatchResult.objects.all()[::-1]
         
         return render(request, 'club_management/matchresult_page.html',{"matchResultData":matchResultData}) #, "matchResultDetailData":matchResultDetailData})
 
@@ -204,7 +204,8 @@ class MatchResultForm_View(View):
 
 class Group_View(View):  
     def get(self, request, *args, **kwargs):  
-        return render(request, 'club_management/group_page.html')
+        members = UserDetail.objects.all()
+        return render(request, 'club_management/group_page.html', {"members":members})
 
 top_page = Toppage_View.as_view()
 my_page = Mypage_View.as_view()

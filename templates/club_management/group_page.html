@@ -2,12 +2,26 @@
 {% block contents %}
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 border-bottom">
-    <h1 class="h2">グループ</h1>
+    <h1 class="h2">メンバー一覧</h1>
 </div>
 
-<div>
-    <h4>ここにコンテンツを記述する</h4>
-    <li     
+<div class="container-fluid p-2"> 
+    <table class="table">
+        <tr>
+            <th scope="col">学年</th>
+            <th scope="col">ID</th>
+            <th scope="col">名前</th>
+            <th scope="col">役職</th>
+        </tr>
+        {% for data in members %}
+        <tr>
+            <td>{{ data.grade }}</td>
+            <td>{{ data.schoolId }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.position }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 
 {% endblock %}

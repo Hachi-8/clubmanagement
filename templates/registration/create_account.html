@@ -9,7 +9,7 @@
   <body>
     <form method="POST" action="{% url 'registration:createAccount_page' %}">
       {% csrf_token %}
-      <label>ユーザーID</label>
+      <label>ユーザー名</label>
       {{ form.username }}
       {{ form.username.errors }}
       <label>パスワード</label>
@@ -18,7 +18,7 @@
       <label>パスワード(確認)</label>
       {{ form.password2 }}
       {{ form.password2.errors }}
-      <button type = "submit">登録</button>
+      <button type = "submit" class="btn btn-primary">登録</button>
     </form>
   </body>
 </html>
